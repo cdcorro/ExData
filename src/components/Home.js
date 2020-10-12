@@ -1,5 +1,7 @@
 import React from "react";
 import mammoth from 'mammoth';
+import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import parse from 'html-react-parser';
 import {
   Button,
   Form,
@@ -16,7 +18,7 @@ function Home() {
 const [ev, changeEv]=React.useState(null); // state to save file import event
 const [op, changeOp]=React.useState(""); // state to change output text
 const [met, changeMet]=React.useState(null); //state to change file's metadata
-
+const [res,changeRes]=React.useState("");
 const parseWordDocxFile = (inputElement) => { // function which parses the file to raw text. Within it, I have commented out 2 other methods of getting text. As html, and markdown
   if(inputElement === null){return;}
       var files = ev;
@@ -28,18 +30,24 @@ const parseWordDocxFile = (inputElement) => { // function which parses the file 
       var reader = new FileReader();
       reader.onloadend = function(event) {
       var arrayBuffer = reader.result;
-      mammoth.extractRawText({arrayBuffer: arrayBuffer}).then(function (resultObject) {
-      var result1 = resultObject.value
-      changeOp(op+result1+"\n\n");
-
+      var options = {
+          styleMap: [
+              "p[style-name='Header'] => p:fresh",
+              "p[style-name='Footer'] => p:fresh"
+          ]
+      };
+//issue: does not read header and footer yet.
+//fix: need to work on custom style input for mammoth.convertToHtml
+        mammoth.convertToHtml({arrayBuffer: arrayBuffer}, options).then(function (resultObject) {
+          var result1 = resultObject.value
+          changeRes(result1);
+          changeOp(result1+"\n\n");
         })
-
 /*
-  mammoth.convertToHtml({arrayBuffer: arrayBuffer}).then(function (resultObject) {
-    var result1 = resultObject.value
-    changeOp("");
-    changeOp(op+result1+"\n\n");
-    console.log(resultObject.value)
+mammoth.extractRawText({arrayBuffer: arrayBuffer}).then(function (resultObject) {
+var result1 = resultObject.value
+changeOp(op+result1+"\n\n");
+
   })
 
   mammoth.convertToMarkdown({arrayBuffer: arrayBuffer}).then(function (resultObject) {
@@ -71,14 +79,6 @@ const parseWordDocxFile = (inputElement) => { // function which parses the file 
               </Button>
             </Segment>
           </Form>
-          <Card style={{width: 450}}>
-        <Card.Content>
-          <Card.Header>Output</Card.Header>
-          <Card.Description>
-            {op}
-          </Card.Description>
-        </Card.Content>
-      </Card>
       <Card style={{width: 450}}>
     <Card.Content>
       <Card.Header>File metadata</Card.Header>
@@ -89,6 +89,18 @@ const parseWordDocxFile = (inputElement) => { // function which parses the file 
       </Card.Description>
     </Card.Content>
   </Card>
+
+  <ReactHTMLTableToExcel
+                    id="test-table-xls-button"
+                    className="download-table-xls-button"
+                    table="table-to-xls"
+                    filename="tablexls"
+                    sheet="tablexls"
+                    buttonText="Download as XLS"/>
+                <table id="table-to-xls">
+                {parse(res)}
+                </table>
+
         </Grid.Column>
       </Grid>
 
