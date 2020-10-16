@@ -68,13 +68,13 @@ changeOp(op+result1+"\n\n");
         verticalAlign="middle"
       >
         <Grid.Column style={{ maxWidth: 450 }}>
-          <Header as="h2" color="teal" textAlign="center">
+          <Header as="h2" color="blue" textAlign="center">
             Drop your .docx file below
           </Header>
           <Form size="large" onSubmit={parseWordDocxFile}>
             <Segment stacked>
               <input type="file" accept=".docx" multiple='false' onChange={e => changeEv(e.target.files)}/>
-              <Button color="teal" size="large" type="submit">
+              <Button color="blue" size="large" type="submit">
                 Convert
               </Button>
             </Segment>
