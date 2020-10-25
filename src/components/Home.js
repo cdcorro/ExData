@@ -1,4 +1,8 @@
 import React from "react";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import { signout } from "../store/actions/auth";
+import requireAuth from "./hoc/requireAuth";
 import mammoth from 'mammoth';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import parse from 'html-react-parser';
@@ -12,14 +16,13 @@ import {
 } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 
+const Main = ({ signout }) => {
 
-function Home() {
-
-const [ev, changeEv]=React.useState(null); // state to save file import event
-const [op, changeOp]=React.useState(""); // state to change output text
-const [met, changeMet]=React.useState(null); //state to change file's metadata
-const [res,changeRes]=React.useState("");
-const parseWordDocxFile = (inputElement) => { // function which parses the file to raw text. Within it, I have commented out 2 other methods of getting text. As html, and markdown
+  const [ev, changeEv]=React.useState(null); // state to save file import event
+  const [op, changeOp]=React.useState(""); // state to change output text
+  const [met, changeMet]=React.useState(null); //state to change file's metadata
+  const [res,changeRes]=React.useState("");
+  const parseWordDocxFile = (inputElement) => { // function which parses the file to raw text. Within it, I have commented out 2 other methods of getting text. As html, and markdown
   if(inputElement === null){return;}
       var files = ev;
       if (!files.length) return;
@@ -68,13 +71,13 @@ changeOp(op+result1+"\n\n");
         verticalAlign="middle"
       >
         <Grid.Column style={{ maxWidth: 450 }}>
-          <Header as="h2" color="teal" textAlign="center">
+          <Header as="h2" color="blue" textAlign="center">
             Drop your .docx file below
           </Header>
           <Form size="large" onSubmit={parseWordDocxFile}>
             <Segment stacked>
               <input type="file" accept=".docx" multiple='false' onChange={e => changeEv(e.target.files)}/>
-              <Button color="teal" size="large" type="submit">
+              <Button color="blue" size="large" type="submit">
                 Convert
               </Button>
             </Segment>
@@ -89,7 +92,9 @@ changeOp(op+result1+"\n\n");
       </Card.Description>
     </Card.Content>
   </Card>
-
+      <Button className="btn-switch" onClick={() => signout()}>
+        Log out
+      </Button>
   <ReactHTMLTableToExcel
                     id="test-table-xls-button"
                     className="download-table-xls-button"
@@ -105,7 +110,26 @@ changeOp(op+result1+"\n\n");
       </Grid>
 
     </div>
+    
   );
+};
+
+function mapStateToProps(state) {
+  return {
+    auth: state.firebaseReducer.auth
+  };
 }
 
-export default Home;
+function mapDispatchToProps(dispatch) {
+  return {
+    signout: () => dispatch(signout())
+  };
+}
+
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  requireAuth
+)(Main);
