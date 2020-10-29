@@ -2,6 +2,7 @@ import React from "react";
 import mammoth from 'mammoth';
 import ReactHTMLTableToExcel from 'react-html-table-to-excel';
 import parse from 'html-react-parser';
+import NavBar from './NavBar';
 import {
   Button,
   Form,
@@ -13,12 +14,13 @@ import {
 import "semantic-ui-css/semantic.min.css";
 
 
-function Home() {
+const AppRoot = () => {
 
 const [ev, changeEv]=React.useState(null); // state to save file import event
 const [op, changeOp]=React.useState(""); // state to change output text
 const [met, changeMet]=React.useState(null); //state to change file's metadata
 const [res,changeRes]=React.useState("");
+
 const parseWordDocxFile = (inputElement) => { // function which parses the file to raw text. Within it, I have commented out 2 other methods of getting text. As html, and markdown
   if(inputElement === null){return;}
       var files = ev;
@@ -62,19 +64,20 @@ changeOp(op+result1+"\n\n");
 
   return (
     <div>
+    <NavBar />
       <Grid
         textAlign="center"
         style={{ height: "100vh" }}
         verticalAlign="middle"
       >
         <Grid.Column style={{ maxWidth: 450 }}>
-          <Header as="h2" color="teal" textAlign="center">
+          <Header as="h2" color="blue" textAlign="center">
             Drop your .docx file below
           </Header>
           <Form size="large" onSubmit={parseWordDocxFile}>
             <Segment stacked>
               <input type="file" accept=".docx" multiple='false' onChange={e => changeEv(e.target.files)}/>
-              <Button color="teal" size="large" type="submit">
+              <Button color="blue" size="large" type="submit">
                 Convert
               </Button>
             </Segment>
@@ -108,4 +111,4 @@ changeOp(op+result1+"\n\n");
   );
 }
 
-export default Home;
+export default AppRoot;
