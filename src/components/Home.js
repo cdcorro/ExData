@@ -60,8 +60,9 @@ changeOp(op+result1+"\n\n");
       reader.readAsArrayBuffer(file);
   }
 
-  return (
+return (
     <div>
+    <NavBar />
       <Grid
         textAlign="center"
         style={{ height: "100vh" }}
