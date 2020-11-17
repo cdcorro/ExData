@@ -6,6 +6,7 @@ import requireAuth from "./hoc/requireAuth";
 import mammoth from 'mammoth';
 import parse from 'html-react-parser';
 import TableToExcel from "@linways/table-to-excel";
+import logo from '../statics/img/logo.png'
 import {
   Button,
   Form,
@@ -93,6 +94,18 @@ for (i = 0; i < files.length; i++) {
 
   return (
     <div>
+    <div className="ui inverted top fixed menu" style={{
+       backgroundColor: '#0E6EB8',
+     }} >
+  <div className="ui container">
+     <a className="header item">
+     <img src={logo} className="ui mini image" style={{ marginRight: '1.5em' }} alt="logo"/> ExData</a>
+     <a class="item">Home</a>
+     <a class="item" onClick={() => signout()}>
+       Log out
+     </a>
+  </div>
+</div>
       <Grid
         textAlign="center"
         style={{ height: "100vh" }}
@@ -119,9 +132,7 @@ for (i = 0; i < files.length; i++) {
     Save as xlsx
   </Button>
 }
-      <Button className="btn-switch" onClick={() => signout()}>
-        Log out
-      </Button>
+
 
       {res.map(i => (
         <table id={i} hidden='true'>
