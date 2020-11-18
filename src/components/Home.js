@@ -7,23 +7,25 @@ import mammoth from 'mammoth';
 import parse from 'html-react-parser';
 import TableToExcel from "@linways/table-to-excel";
 import logo from '../statics/img/logo.png'
+import { useHistory } from "react-router-dom";
 import {
   Button,
   Form,
   Grid,
   Header,
   Segment,
-  Card
+  Card, Menu, Dimmer, Loader, Divider, Icon
 } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 
 const Main = ({ signout }) => {
+  const [ready, changeReady]=React.useState(false);
   const [ev, changeEv]=React.useState(null); // state to save file import event
 //  const [op, changeOp]=React.useState(""); // state to change output text
   const [met, changeMet]=React.useState(null); //state to change file's metadata
   const [res,changeRes]=React.useState([]);
   const [convclick, changeconv]=React.useState(false);
-  const [done, isDone]=React.useState(false);
+  const [done1, isDone]=React.useState(false);
   const [name, changeName]=React.useState([]);
   var options = {
      styleMap: [
@@ -56,25 +58,25 @@ for(var c=0;c<res.length;c++){
    var arrayBuffer = reader.result;
      mammoth.convertToHtml({arrayBuffer: arrayBuffer}, options).then(function (resultObject) {
        var result1 = resultObject.value
-       console.log(result1);
+       //console.log(result1);
        changeRes(oldres => [...oldres, result1]); //problem
        //console.log("current length= "+res.length);
-     }).done()
+     });
  }
- isDone(true);
+
 };
 
   const parseWordDocxFile = (inputElement) => { // function which parses the file to raw text. Within it, I have commented out 2 other methods of getting text. As html, and markdown
   if(inputElement === null){return;}
       var files = ev;
       if (!files.length) return;
-      console.log(files.length);
+      //console.log(files.length);
       var i;
       for(var c=0; c<files.length;c++)
       {
         var temp="table".concat(c.toString());
         changeName(oldName => [...oldName,temp]);
-        console.log(temp);
+
       }
 for (i = 0; i < files.length; i++) {
       var file = files[i];
@@ -85,27 +87,60 @@ for (i = 0; i < files.length; i++) {
        }
 
     changeMet(null);
-
+isDone(true);
     //  console.log(res.length);
   };
 
 
-
+ const history = useHistory();
 
   return (
     <div>
-    <div className="ui inverted top fixed menu" style={{
-       backgroundColor: '#0E6EB8',
-     }} >
-  <div className="ui container">
-     <a className="header item">
-     <img src={logo} className="ui mini image" style={{ marginRight: '1.5em' }} alt="logo"/> ExData</a>
-     <a class="item">Home</a>
-     <a class="item" onClick={() => signout()}>
-       Log out
-     </a>
-  </div>
-</div>
+    <Menu style={{
+     backgroundColor: '#0E6EB8', color: 'white'}}>
+            <Menu.Item
+              name='editorials'
+              style={{
+               color: 'white'}}
+              //active={activeItem === 'editorials'}
+            //  onClick={this.handleItemClick}
+            >
+              <img src={logo} className="ui mini image" style={{ marginRight: '1.5em' }} alt="logo"/> ExData
+            </Menu.Item>
+
+            <Menu.Item
+              name='reviews'
+              style={{
+               color: 'white'}}
+                onClick={() =>{history.push("/")}}
+            //  active={activeItem === 'reviews'}
+            //  onClick={this.handleItemClick}
+            >
+              Home
+            </Menu.Item>
+
+            <Menu.Item
+              name='upcomingEvents'
+              style={{
+               color: 'white'}}
+               onClick={() =>{history.push("/documentation")} }
+            //  active={activeItem === 'upcomingEvents'}
+            //  onClick={this.handleItemClick}
+            >
+                Documentation
+            </Menu.Item>
+            <Menu.Item
+            style={{
+             color: 'white'}}
+             onClick={() => signout()}>
+
+              Log out
+
+            </Menu.Item>
+          </Menu>
+          <Dimmer active={!done1 && convclick} inverted>
+        <Loader size="large">Loading</Loader>
+      </Dimmer>
       <Grid
         textAlign="center"
         style={{ height: "100vh" }}
@@ -113,24 +148,35 @@ for (i = 0; i < files.length; i++) {
       >
         <Grid.Column style={{ maxWidth: 450 }}>
           <Header as="h2" color="blue" textAlign="center">
-            Drop your .docx file below
+            Drop your .docx files below
           </Header>
           <Form size="large" onSubmit={parseWordDocxFile}>
             <Segment stacked>
-              <input type="file" accept=".docx" multiple onChange={e => changeEv(e.target.files)}/>
+              <input type="file" accept=".docx" multiple onChange={e => {changeEv(e.target.files); changeReady(true);}} disabled={done1}/>
               <Button color="blue" size="large" type="submit" onClick={()=> {
                 changeconv(true);
 
-              }}>
+              }} disabled={done1 || !ready}>
                 Convert
               </Button>
             </Segment>
           </Form>
-
-{res.length>0 && isDone &&
-  <Button className="btn-switch" onClick={() => saver()}>
+<br/>
+<Divider/>
+{res.length>0 && done1 &&
+  <div>
+  <a>Please wait for the dowload icon to become visible before downloading</a> <br/> <br/>
+  <Button.Group>
+  <Button className="btn-switch" color="green" onClick={() => saver()}>
+  <Icon name='download' size='large' />
     Save as xlsx
   </Button>
+   <Button.Or />
+  <Button className="btn-switch" color="blue" onClick={() =>{window.location.reload(false);}}>
+    Try again
+  </Button>
+  </Button.Group>
+  </div>
 }
 
 
