@@ -1,4 +1,7 @@
 import React from "react";
+import { compose } from "redux";
+import { connect } from "react-redux";
+import requireAuth from "./hoc/requireAuth";
 import logo from '../statics/img/logo.png'
 import { signout } from "../store/actions/auth";
 import { useHistory } from "react-router-dom";
@@ -13,7 +16,7 @@ import {
 } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
 
-const Documentation = () => {
+const Documentation = ({signout}) => {
  const history = useHistory();
   return (
     <div>
@@ -104,6 +107,22 @@ const Documentation = () => {
 
   );
 };
+function mapStateToProps(state) {
+  return {
+    auth: state.firebaseReducer.auth
+  };
+}
 
+function mapDispatchToProps(dispatch) {
+  return {
+    signout: () => dispatch(signout())
+  };
+}
 
-export default Documentation;
+export default compose(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  ),
+  requireAuth
+)(Documentation);
