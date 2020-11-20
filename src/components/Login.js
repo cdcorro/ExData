@@ -4,7 +4,16 @@ import { signup, signin, resetPassword } from "../store/actions/auth";
 import useForm from "../utils/useForm";
 import validate from "../utils/validateLoginForm";
 import Spinner from "./Spinner";
-import {Button, Grid} from "semantic-ui-react";
+import logo from '../statics/img/logo.png'
+import {Button,
+  Form,
+  Grid,
+  Header,
+  Image,
+  Message,
+  Segment,
+  Modal,
+  Input,} from "semantic-ui-react";
 const Login = ({
   signup,
   signin,
@@ -40,16 +49,21 @@ const Login = ({
 
   return (
     <div>
-     
-      <h2>
+     <Grid textAlign="center"
+        style={{ height: "100vh" }}
+        verticalAlign="middle"
+        >
+      <Grid.Column style={{ maxWidth: 450 }}>
+      <Image src={logo} size='small' centered />
+      <Header as='h2' color="blue" textAlign='center'>
         {reset ? "Reset password" : newUser ? "Create an account" : "Sign in"}
-      </h2>
+      </Header>
       {authMsg && <p className="auth-message">{authMsg}</p>}
       <form onSubmit={handleSubmit} noValidate>
         {/* Email */}
-        <div class="ui input focus">
-          <label htmlFor="email">E-mail</label>
-          <input
+          <Form size="large">
+          <Segment stacked>
+          <Form.Input
             type="email"
             id="email"
             name="email"
@@ -65,13 +79,12 @@ const Login = ({
           {errors.emailFormatInvalid && (
             <small>{errors.emailFormatInvalid}</small>
           )}
-        </div>
+        
 
         {/* PASSWORD */}
         {!reset && (
-          <div class="ui input focus">
-            <label htmlFor="password">Password</label>
-            <input
+          <div>
+            <Form.Input
               type="password"
               id="password"
               name="password"
@@ -79,17 +92,19 @@ const Login = ({
               placeholder="Your password"
               onChange={handleChange}
               className={
-                (errors.passIsStrong || errors.passIsEmpty) && "input-error"
+                (errors.passIsEmpty) && "input-error"
               }
             />
-            {errors.passIsStrong && <small>{errors.passIsStrong}</small>}
             {errors.passIsEmpty && <small>{errors.passIsEmpty}</small>}
-          </div>
+            </div>
         )}
-
+        
+        
+        
         {/* BUTTONS */}
-        <div>
-          <Button type="submit">
+        
+          <br/>
+          <Button size = "large" type="submit">
             {loading ? (
               <Spinner />
             ) : reset ? (
@@ -100,19 +115,24 @@ const Login = ({
               "Sign in"
             )}
           </Button>
+          </Segment>
+        </Form>
+          <div>
+          <br/>
+          
           {!newUser && !reset && (
-            <Button onClick={() => SetReset(true)} >
+            <Button color="blue" size="large" onClick={() => SetReset(true)} >
               Forgot password?
             </Button>
           )}
           {reset && (
-            <Button onClick={() => SetReset(false)}>
+            <Button color="blue" size="large" onClick={() => SetReset(false)}>
               Back to sign in
             </Button>
           )}
         </div>
       </form>
-      <footer>
+      {/*<footer>
         <p>
           {newUser ? "Already have an account?" : "Don't have an account yet?"}
         </p>
@@ -124,7 +144,9 @@ const Login = ({
         >
           {newUser ? "Sign in" : "Create an account"}
         </Button>
-      </footer>
+        </footer>*/}
+      </Grid.Column>
+      </Grid>
     </div>
   );
 };
