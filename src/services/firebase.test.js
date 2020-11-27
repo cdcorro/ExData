@@ -1,4 +1,4 @@
-import {
+/*import {
     signin,
     signout,
 }from '../store/actions/auth';
@@ -18,4 +18,4 @@ test('signInWithEmailAndPassword should throw error',async()=>{
         );
     }
    
-})
+})*/
