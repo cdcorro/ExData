@@ -132,19 +132,7 @@ const Login = ({
           )}
         </div>
       </form>
-      {/*<footer>
-        <p>
-          {newUser ? "Already have an account?" : "Don't have an account yet?"}
-        </p>
-        <Button
-          onClick={() => {
-            setNewUser(!newUser);
-            if (reset) SetReset(false);
-          }}
-        >
-          {newUser ? "Sign in" : "Create an account"}
-        </Button>
-        </footer>*/}
+      {}
       </Grid.Column>
       </Grid>
     </div>
