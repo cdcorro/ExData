@@ -6,6 +6,7 @@ import logo from '../statics/img/logo.png'
 import { signout } from "../store/actions/auth";
 import { useHistory } from "react-router-dom";
 import { Container } from 'semantic-ui-react'
+import templatedoc from './templatedoc.docx';
 import {
   Button,
   Form,
@@ -15,7 +16,12 @@ import {
   Menu, Divider
 } from "semantic-ui-react";
 import "semantic-ui-css/semantic.min.css";
-
+import image1 from "./exss/2.png";
+import image2 from "./exss/3.png";
+import image3 from "./exss/4.png";
+import image4 from "./exss/5.png";
+import image5 from "./exss/6.png";
+import image6 from "./exss/7.png";
 const Documentation = ({signout}) => {
  const history = useHistory();
   return (
@@ -52,7 +58,7 @@ const Documentation = ({signout}) => {
             //  active={activeItem === 'upcomingEvents'}
             //  onClick={this.handleItemClick}
             >
-                Documentation
+                Instructions
             </Menu.Item>
             <Menu.Item
             style={{
@@ -71,57 +77,36 @@ const Documentation = ({signout}) => {
     <Header as='h2'>Instructions</Header>
     <Divider/>
     <p>
-     Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-      ligula eget dolor. Aenean massa strong. Cum sociis natoque penatibus et
-      magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-      ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
-      quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
-      arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
-      Nullam dictum felis eu pede link mollis pretium. Integer tincidunt. Cras
-      dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.
-      Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.
-      Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus
-      viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet.
-      Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.
-    </p>
-    <p>
-      Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-      ligula eget dolor. Aenean massa strong. Cum sociis natoque penatibus et
-      magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-      ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
-      quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
-      arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
-      Nullam dictum felis eu pede link mollis pretium. Integer tincidunt. Cras
-      dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.
-      Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.
-      Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus
-      viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet.
-      Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.
-	</p>
-	<p>
-	  Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
-      ligula eget dolor. Aenean massa strong. Cum sociis natoque penatibus et
-      magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis,
-      ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
-      quis enim. Donec pede justo, fringilla vel, aliquet nec, vulputate eget,
-      arcu. In enim justo, rhoncus ut, imperdiet a, venenatis vitae, justo.
-      Nullam dictum felis eu pede link mollis pretium. Integer tincidunt. Cras
-      dapibus. Vivamus elementum semper nisi. Aenean vulputate eleifend tellus.
-      Aenean leo ligula, porttitor eu, consequat vitae, eleifend ac, enim.
-      Aliquam lorem ante, dapibus in, viverra quis, feugiat a, tellus. Phasellus
-      viverra nulla ut metus varius laoreet. Quisque rutrum. Aenean imperdiet.
-      Etiam ultricies nisi vel augue. Curabitur ullamcorper ultricies nisi.
-	</p>
-	<p>
-	</p>
-	<p>
-	</p>
-	<p>
-	</p>
-	<p>
-	</p>
-	<p>
-	</p>
+    <Header as='h3'>Template</Header>
+    <Divider/>
+  Click <a href={templatedoc} download>here</a> to download the template document. Make sure any uploaded report follows this format.<br/><br/>
+</p>
+<p>
+<Header as='h3'>Steps</Header>
+<Divider/>
+<Header as='h4'>Step 1</Header>
+Download the template from the download link above and use it for any and all reports you would like to have converted to an excel workbook.
+<Header as='h4'>Step 2</Header>
+Once you logged in, you will be presented with the converter.<br/>
+<img src={image1}  style={{ width:'90%'}} />
+<Header as='h4'>Step 3</Header>
+Click on "Choose files" and a file explorer will open where you will be able to select your report documents.<br/>
+<img src={image2}  style={{ width:'90%'}} />
+<Header as='h4'>Step 4</Header>
+After you have selected all your files and clicked "Open" on the file explorer, the converter will be ready to convert the documents into an Excel workbook. Click on "Convert"<br/>
+<img src={image3}  style={{ width:'90%'}} />
+<Header as='h4'>Step 5</Header>
+After a few seconds, the Excel workbook will be available to be downloaded. You can either click on download, or if you feel that you have made a mistake, you can click on try again.<br/>
+<img src={image4}  style={{ width:'90%'}} />
+<Header as='h4'>Step 6</Header>
+The downloaded file will now be available on your computer to be opened and edited, if necessary.<br/>
+<img src={image5}  style={{ width:'90%'}} /><br/><br/>
+</p>
+<Header as='h3'>FYI</Header>
+<Divider/>
+<br/>
+Each of your Word document will be split into seperate sheets in the same workbook you just downloaded..<br/>
+<img src={image6}  style={{ width:'90%'}} /><br/><br/>
   </Container>
   </div>
       </div>

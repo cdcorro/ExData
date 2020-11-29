@@ -127,7 +127,7 @@ isDone(true);
             //  active={activeItem === 'upcomingEvents'}
             //  onClick={this.handleItemClick}
             >
-                Documentation
+                Instructions
             </Menu.Item>
             <Menu.Item
             style={{

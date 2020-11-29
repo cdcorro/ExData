@@ -8,12 +8,12 @@ const Header = () => (
             <div class="et_pb_code_inner">
             </div>
          </div>
-         <div class="et_pb_with_border et_pb_module et_pb_fullwidth_menu et_pb_fullwidth_menu_0_tb_header et_pb_bg_layout_light  et_pb_text_align_right et_dropdown_animation_fade et_pb_fullwidth_menu--with-logo et_pb_fullwidth_menu--style-left_aligned">
-            <div class="et_pb_row clearfix">
-               <div class="et_pb_menu__logo-wrap">
-                  <div class="et_pb_menu__logo">
+         <div class="et_pb_with_border et_pb_module et_pb_fullwidth_menu et_pb_fullwidth_menu_0_tb_header et_pb_bg_layout_light  et_pb_text_align_right et_dropdown_animation_fade et_pb_fullwidth_menu--with-logo et_pb_fullwidth_menu--style-left_aligned" >
+            <div class="et_pb_row clearfix" >
+               <div class="et_pb_menu__logo-wrap" >
+                  <div class="et_pb_menu__logo" >
                      <a href="https://www.catalent.com/">
-                     <img loading="lazy" src="https://www.catalent.com/wp-content/uploads/sites/6/2018/11/Page-Head_large.png" alt="" height="auto" width="auto" class="wp-image-211743" />
+                     <img loading="lazy" src="https://www.catalent.com/wp-content/uploads/sites/6/2018/11/Page-Head_large.png" alt="" height="auto" width="auto" class="wp-image-211743"  />
                      </a>
                   </div>
                </div>
