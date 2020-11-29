@@ -1,5 +1,6 @@
 # ExData
 A web application tool that takes in multiple lab reports in Word .docx and compiles it into a single Excel worrkbook .xlsx with multiple sheets.
+Demo: https://exdata-108de.web.app/
 
 ## How to run?
 
