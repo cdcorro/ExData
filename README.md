@@ -39,6 +39,20 @@ to run the React app on your local machine.
 
 To explain the high-level architectural design of our software system for ExData, we decided to describe it using the Layered Architecture Diagram. Our application consists of several different layers, and each layer is built and based on a pre-existing layer:
 
-###User Interface Layer:### This layer
+### User Interface Layer
+
+The UI layer consists of three different screens: 1) the Login Screen, 2) the document-upload screen, and 3) the reports-dsiplay screen.
+
+### Authentication Layer
+
+The authentication layer consists of the user-login management, by connecting to the Infrastructure layer to ensure the login is valid. It also consists of the file authentication management, ensuring the files inputted are the correct file type (.docx).
+
+### Application Functionality Layer
+
+The Application Functionality layer consists of the applications core functionality of converting the inputted Word documents into Excel spreadsheets. 
+
+### Infrastructure Layer
+
+The Infrastructure layer consists of the Firebase database, where the user authentication database is stored. It ensures that the login information inoutted by the user is valid, allowing them to access the rest of the application. 
 
 
