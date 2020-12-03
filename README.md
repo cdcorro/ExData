@@ -49,10 +49,10 @@ The authentication layer consists of the user-login management, by connecting to
 
 ### Application Functionality Layer
 
-The Application Functionality layer consists of the applications core functionality of converting the inputted Word documents into Excel spreadsheets. 
+The Application Functionality layer consists of the application's core functionality of converting the inputted Word documents into Excel spreadsheets. 
 
 ### Infrastructure Layer
 
-The Infrastructure layer consists of the Firebase database, where the user authentication database is stored. It ensures that the login information inoutted by the user is valid, allowing them to access the rest of the application. 
+The Infrastructure layer consists of the Firebase database, where the user authentication database is stored. It ensures that the login information inputted by the user is valid, allowing them to access the rest of the application. 
 
 
