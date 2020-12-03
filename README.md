@@ -34,3 +34,11 @@ npm install
 npm start
 ```
 to run the React app on your local machine.
+
+## Application Architecture
+
+To explain the high-level architectural design of our software system for ExData, we decided to describe it using the Layered Architecture Diagram. Our application consists of several different layers, and each layer is built and based on a pre-existing layer:
+
+###User Interface Layer:### This layer
+
+
